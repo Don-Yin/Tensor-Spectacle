@@ -4,12 +4,21 @@ Uses manim to visulize a sequence of tensors.
 - When using the matplotlib as engine:
 ![demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_matplotlib.gif)
 
+https://github.com/Don-Yin/Tensor-Spectacle/blob/c0531bb52893ef3680bb6583b11361a83b8445b4/assets/TensorsDistribution_matplotlib.mp4
+
+<!-- https://youtu.be/iDXUqODD-wY -->
+
 <!-- <video src="https://github.com/Don-Yin/Tensor-Spectacle/blob/c0531bb52893ef3680bb6583b11361a83b8445b4/assets/TensorsDistribution_matplotlib.mp4" controls="controls" style="max-width: 730px;"></video> -->
 
 - Native mainim cubes (much much slower)
 ![demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_native.gif)
 
+https://github.com/Don-Yin/Tensor-Spectacle/blob/c0531bb52893ef3680bb6583b11361a83b8445b4/assets/TensorsDistribution_native.mp4
+
+<!-- https://youtu.be/Ir833TAy8Bk -->
+
 <!-- <video src="https://github.com/Don-Yin/Tensor-Spectacle/blob/c0531bb52893ef3680bb6583b11361a83b8445b4/assets/TensorsDistribution_native.mp4" controls="controls" style="max-width: 730px;"></video> -->
+
 
 ## Installation:
 ```pip install Tensor-Spectacle```
