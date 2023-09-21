@@ -1,3 +1,4 @@
 rich
 manim
 torch
+matplotlib
