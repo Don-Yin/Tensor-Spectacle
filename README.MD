@@ -22,10 +22,10 @@ Then run your script, and watch it happen:
 
 ## Demo:
 - When using the matplotlib as engine:
-![demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_matplotlib.gif)
+[demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_matplotlib.gif)
 
 - Native mainim cubes (much much slower)
-![demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_native.gif)
+[demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_native.gif)
 
 ## Example
 An example is at ```_test.py```
