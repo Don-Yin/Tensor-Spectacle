@@ -57,6 +57,7 @@ This project is licensed under the CC BY-NC License.
 
 
 ## Citations
+```latex
 @misc{Tensor-Spectacle2023,
   author = {Don Yin},
   title = {Tensor-Spectacle: Visualizing a Sequence of Tensors},
@@ -65,3 +66,4 @@ This project is licensed under the CC BY-NC License.
   journal = {GitHub Repository},
   howpublished = {\url{https://github.com/YourUsername/Tensor-Spectacle}},
 }
+```
