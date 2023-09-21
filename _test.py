@@ -1,6 +1,7 @@
-from src.scenes.tensors_distribution import TensorVisualizationScene
+# from src.tensorspec.scenes.tensors_distribution import TensorVisualizationScene
+from src.tensorspec.scenes.tensors_distribution import TensorVisualizationScene
+from src.tensorspec.utils.general import banner
 from manim.utils.file_ops import open_file as open_media_file
-from src.utils.general import banner
 from manim import tempconfig
 from random import randint
 import torch
@@ -33,4 +34,8 @@ def test_example_runs():
     ):
         scene = Example()
         scene.render()
-        # open_media_file(scene.renderer.file_writer.movie_file_path)
+        open_media_file(scene.renderer.file_writer.movie_file_path)
+
+
+if __name__ == "__main__":
+    test_example_runs()

@@ -3,7 +3,7 @@ from manim import Rectangle, Text, VGroup, WHITE, BLUE, RIGHT
 
 def make_labels(labels: list[str], selected_idx=0, use_opengl_renderer=False):
     """make a list of horizontally aligned rectangles from left to right"""
-
+    global VGroup
     if use_opengl_renderer:
         from manim.mobject.opengl.opengl_vectorized_mobject import OpenGLVGroup as VGroup
 

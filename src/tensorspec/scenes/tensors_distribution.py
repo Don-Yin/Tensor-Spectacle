@@ -1,8 +1,8 @@
 from manim import ThreeDScene, ORIGIN, LEFT, RIGHT, ReplacementTransform, UP
-from src.components.plots import create_distribution_plot
-from src.components.matrices import create_3D_matrix as create_3D_matrix_native
-from src.components.matrices_plt import create_3D_matrix as create_3D_matrix_plt
-from src.components.labels import make_labels
+from src.tensorspec.components.plots import create_distribution_plot
+from src.tensorspec.components.matrices import create_3D_matrix as create_3D_matrix_native
+from src.tensorspec.components.matrices_plt import create_3D_matrix as create_3D_matrix_plt
+from src.tensorspec.components.labels import make_labels
 
 
 class TensorVisualizationScene(ThreeDScene):
