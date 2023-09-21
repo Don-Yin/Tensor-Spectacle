@@ -2,20 +2,38 @@
 This is a toy project that uses manim to visulize a sequence of tensors.
 
 ## Installation:
-```
-pip install -r requirements.txt
-```
-Direct pip installation coming soon.
+```pip install Tensor-Spectacle```
+
+## Requirements
+- LaTex installed
+- Whatever other packages on which ```manim``` is based
 
 ## Quick Start:
 To visualize a list of tensors, you can easily create a class as shown below:
 ```python
+from tensorspec.scenes.tensors_distribution import TensorVisualizationScene
+
+# make scene
 class Example(TensorVisualizationScene):
     def construct(self):
         random_shapes = [(randint(1, 2), randint(3, 6), randint(3, 6), randint(3, 6)) for _ in range(3)]
         tensors = [torch.rand(shape) for shape in random_shapes]
         labels = [f"Random Tensor {i}" for i in range(len(tensors))]
         super().construct(tensors=tensors, labels=labels, duration_each=0.8, duration_gap=1, engine="matplotlib")
+
+# render
+with tempconfig(
+    {
+        "use_opengl_renderer": True,
+        "disable_caching": True,
+        "write_to_movie": True,
+        "resolution": "1080p",
+        "renderer": "cairo",  # "opengl", "cairo"
+        "fps": 60,
+    }
+):
+    scene = Example()
+    scene.render()
 ```
 
 Then run your script, and watch it happen:
