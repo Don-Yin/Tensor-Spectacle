@@ -71,7 +71,15 @@ jobs:
           python -m pip install build --user
 
       - name: Build a binary wheel and a source tarball]
-        run: python -m build
+        run: |
+          pip install --upgrade wheel
+          python -m build
+        
+      - name: Install twine
+        run: pip install twine
+        
+      - name: Check the distribution with twine
+        run: twine check dist/*
 
       - name: Store the distribution packages
         uses: actions/upload-artifact@v3
