@@ -37,6 +37,11 @@ jobs:
       - name: Setup FFmpeg
         uses: FedericoCarboni/setup-ffmpeg@v2
 
+      - name: Install pangocairo dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpango1.0-dev libcairo2-dev
+
       # --------
       - name: Format with black
         run: |
