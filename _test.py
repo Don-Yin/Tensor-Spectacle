@@ -28,7 +28,7 @@ def test_example_runs():
             "disable_caching": True,
             "write_to_movie": True,
             "resolution": "1080p",
-            "renderer": "opengl",
+            "renderer": "cairo",  # "opengl", "cairo"
             "fps": 60,
         }
     ):
