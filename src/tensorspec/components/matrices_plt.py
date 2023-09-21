@@ -35,6 +35,7 @@ def plot_batch(batch, idx, save_path, alpha=0.5):
 
 
 def create_3D_matrix(tensor, distance=0.1, use_opengl_renderer=False):
+    global VGroup, VMobject
     if use_opengl_renderer:
         from manim.mobject.opengl.opengl_vectorized_mobject import OpenGLVGroup as VGroup, OpenGLVMobject as VMobject
 

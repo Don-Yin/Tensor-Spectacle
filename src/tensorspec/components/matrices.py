@@ -15,6 +15,7 @@ def create_3D_matrix(tensor, cube_side_length=0.1, spacing=0.12, use_opengl_rend
     Take a 3D tensor and create a 3D matrix of cubes with the same shape as the tensor.
     Align the matrices in the batch from top to bottom.
     """
+    global VGroup, VMobject
     if use_opengl_renderer:
         from manim.mobject.opengl.opengl_vectorized_mobject import OpenGLVGroup as VGroup, OpenGLVMobject as VMobject
 
