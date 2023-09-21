@@ -34,6 +34,9 @@ jobs:
           pip install black pytest
           pip install -r requirements.txt
 
+      - name: Setup FFmpeg
+        uses: FedericoCarboni/setup-ffmpeg@v2
+
       # --------
       - name: Format with black
         run: |
