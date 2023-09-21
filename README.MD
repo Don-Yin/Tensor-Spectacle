@@ -1,5 +1,12 @@
 # Tensor-Spectacle: Visualizing a Sequence of Tensors
-This is a toy project that uses manim to visulize a sequence of tensors.
+Uses manim to visulize a sequence of tensors.
+
+- When using the matplotlib as engine:
+![demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_matplotlib.gif)
+
+- Native mainim cubes (much much slower)
+![demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_native.gif)
+
 
 ## Installation:
 ```pip install Tensor-Spectacle```
@@ -38,14 +45,7 @@ with tempconfig(
     scene.render()
 ```
 
-Then run your script, and watch it happen:
-
-## Demo:
-- When using the matplotlib as engine:
-![demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_matplotlib.gif)
-
-- Native mainim cubes (much much slower)
-![demo](https://github.com/Don-Yin/Tensor-Spectacle/blob/36e25d87ca4653a9711b082fc224b13563507745/assets/TensorsDistribution_native.gif)
+Then run your script, and watch it happen.
 
 ## Note:
 At the moment, using a tensor with channel size less than 3 is recommanded.
