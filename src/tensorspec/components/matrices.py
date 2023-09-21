@@ -1,3 +1,8 @@
+"""
+Script making the stack of 3D cubes at the tensor -> 3D matrix section using manim native cubes.
+"""
+
+
 from manim import VGroup, Text, DOWN, DEGREES, Cube, BLUE, RED, UP, color_to_rgb, rgb_to_color
 import numpy as np
 

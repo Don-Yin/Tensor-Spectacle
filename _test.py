@@ -1,4 +1,3 @@
-# from src.tensorspec.scenes.tensors_distribution import TensorVisualizationScene
 from src.tensorspec.scenes.tensors_distribution import TensorVisualizationScene
 from src.tensorspec.utils.general import banner
 from manim.utils.file_ops import open_file as open_media_file

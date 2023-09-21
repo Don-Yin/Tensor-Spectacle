@@ -1,5 +1,10 @@
-import numpy as np
+"""
+Script for making the bar plot showing the distribution of tensor values at the tensor -> distribution section
+"""
+
+
 from manim import BarChart, DOWN, Group, Text, UP, VMobject, RIGHT, LEFT
+import numpy as np
 from scipy.stats import gaussian_kde
 
 
@@ -28,7 +33,6 @@ def create_distribution_plot(tensor, num_bins=100, font_size=24, width=6, height
         kde_line = VMobject()
         kde_line.set_points_as_corners(kde_line_points)
 
-        # Create min and max labels for this batch
         min_label = (
             Text(f"Min: {values.min():.2f}", font_size=font_size)
             .next_to(barchart, direction=DOWN, buff=0.2)
@@ -40,7 +44,6 @@ def create_distribution_plot(tensor, num_bins=100, font_size=24, width=6, height
             .align_to(barchart.get_corner(DOWN + RIGHT), RIGHT)
         )
 
-        # Group the bar chart, kde line, and labels for this batch
         group = Group(barchart, kde_line, min_label, max_label)
         group.move_to(UP * i * (height + 1))  # Adjust the vertical position based on the batch index
 

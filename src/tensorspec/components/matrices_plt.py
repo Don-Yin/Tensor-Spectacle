@@ -1,12 +1,30 @@
+"""
+Script making the stack of 3D cubes at the tensor -> 3D matrix section using matplotlib to generate the svg and use those as mobjects. This is much faster than using manim native cubes.
+"""
+
+
+from manim import SVGMobject, VGroup, VMobject, Text, DOWN
+import matplotlib.pyplot as plt
+from uuid import uuid4
 from pathlib import Path
 import numpy as np
-import matplotlib.pyplot as plt
-from manim import SVGMobject, VGroup, VMobject, Text, DOWN
 import os
-from uuid import uuid4
 
 
-def plot_batch(batch, idx, save_path, alpha=0.5):
+def plot_channel(batch, idx, save_path, alpha=0.5):
+    """
+    Plots a 3D representation of data from a batch using voxels and saves it as an SVG.
+    Note: using a tensor with channel size less than 3 is recommanded.
+    Parameters:
+        - batch (numpy.ndarray): A 3D numpy array representing the data to be plotted.
+        - idx (int): An identifier to label the saved plot (e.g., plot number or iteration).
+        - save_path (Path or str): The directory where the SVG plot should be saved.
+        - alpha (float, optional): The opacity of the voxel colors. Default is 0.5.
+
+    Description:
+        The function visualizes the data in a 3D space, color-mapping the values to the seismic colormap.
+        The function saves the 3D voxel representation in a dark theme as an SVG to the specified path.
+    """
     plt.style.use("dark_background")
     fig = plt.figure()
 
@@ -49,7 +67,7 @@ def create_3D_matrix(tensor, distance=0.1, use_opengl_renderer=False):
     hexes = [str(uuid4().hex) for _ in range(num_batches)]
 
     for i in range(num_batches):
-        plot_batch(tensor[i], hexes[i], save_path=save_path)
+        plot_channel(tensor[i], hexes[i], save_path=save_path)
 
     svg_objects = [SVGMobject(save_path / f"3d_plot_{hex}.svg") for hex in hexes]
 
