@@ -74,7 +74,7 @@ class TensorVisualizationScene(ThreeDScene):
                 create_3D_matrix = create_3D_matrix_plt
             case "native":
                 create_3D_matrix = create_3D_matrix_native
-                
+
         num_tensors = len(tensors)
         barplots = []
         cubes = []
@@ -88,7 +88,6 @@ class TensorVisualizationScene(ThreeDScene):
             )
             bar_group = self.scale_to_fit_camera(bar_group, width_ratio=0.36, height_ratio=0.8)
             barplots.append(bar_group)
-            
 
             # -------- create the 3D matrix --------
             cube_group = (
