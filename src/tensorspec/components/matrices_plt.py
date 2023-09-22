@@ -3,12 +3,13 @@ Script making the stack of 3D cubes at the tensor -> 3D matrix section using mat
 """
 
 
-from manim import SVGMobject, VGroup, VMobject, Text, DOWN
+from manim import SVGMobject, VGroup, VMobject, Text, DOWN, Mobject
 import matplotlib.pyplot as plt
 from uuid import uuid4
 from pathlib import Path
 import numpy as np
 import os
+from torch import tensor
 
 
 def plot_channel(batch, idx, save_path, alpha=0.5):
@@ -52,34 +53,38 @@ def plot_channel(batch, idx, save_path, alpha=0.5):
     plt.close(fig)
 
 
-def create_3D_matrix(tensor, distance=0.1, use_opengl_renderer=False):
-    global VGroup, VMobject
-    if use_opengl_renderer:
-        from manim.mobject.opengl.opengl_vectorized_mobject import OpenGLVGroup as VGroup, OpenGLVMobject as VMobject
+class Matrix3DMatplotlib(Mobject):
+    def __init__(self, tensor: tensor, use_opengl_renderer: bool = False, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        assert tensor.dim() == 4, f"The tensor must be 4-dimensional (batch, c, h, w) got {tensor.dim()}"
+        self.tensor = tensor
+        self.distance = 0.1
+        global VGroup, VMobject
+        if use_opengl_renderer:
+            from manim.mobject.opengl.opengl_vectorized_mobject import OpenGLVGroup as VGroup, OpenGLVMobject as VMobject
+        self.make_matrix()
 
-    assert len(tensor.shape) == 4, "Input tensor must be 4D"
+    def make_matrix(self):
+        save_path = Path("media", "image_cache")
+        save_path.mkdir(parents=True, exist_ok=True)
+        [os.remove(file) for file in save_path.glob("*")]
 
-    save_path = Path("media", "image_cache")
-    save_path.mkdir(parents=True, exist_ok=True)
-    [os.remove(file) for file in save_path.glob("*")]
+        num_channels = self.tensor.shape[0]
+        hexes = [str(uuid4().hex) for _ in range(num_channels)]
 
-    num_batches = tensor.shape[0]
-    hexes = [str(uuid4().hex) for _ in range(num_batches)]
+        for i in range(num_channels):
+            plot_channel(self.tensor[i], hexes[i], save_path=save_path)
 
-    for i in range(num_batches):
-        plot_channel(tensor[i], hexes[i], save_path=save_path)
+        svg_objects = [SVGMobject(save_path / f"3d_plot_{hex}.svg") for hex in hexes]
+        vgroup = VGroup()
+        previous_object = None
 
-    svg_objects = [SVGMobject(save_path / f"3d_plot_{hex}.svg") for hex in hexes]
-
-    vgroup = VGroup()
-    previous_object = None
-
-    for i, obj in enumerate(svg_objects):
-        shape_label = Text(f"{tensor[i].shape}").scale_to_fit_width(obj.get_width()).next_to(obj, direction=DOWN, buff=0.1)
-        batch_group = VGroup(obj, shape_label)
-        if previous_object:
-            batch_group.next_to(previous_object, direction=DOWN, buff=distance)
-        vgroup.add(batch_group)
-        previous_object = batch_group
-
-    return vgroup
+        for i, obj in enumerate(svg_objects):
+            shape_label = Text(f"{self.tensor[i].shape}").scale_to_fit_width(obj.get_width())
+            shape_label = shape_label.next_to(obj, direction=DOWN, buff=0.1)
+            batch_group = VGroup(obj, shape_label)
+            if previous_object:
+                batch_group.next_to(previous_object, direction=DOWN, buff=self.distance)
+            vgroup.add(batch_group)
+            previous_object = batch_group
+        self.add(vgroup)

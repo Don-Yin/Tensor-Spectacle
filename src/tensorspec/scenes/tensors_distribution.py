@@ -1,7 +1,7 @@
 from manim import ThreeDScene, ORIGIN, LEFT, RIGHT, ReplacementTransform, UP
 from src.tensorspec.components.plots import create_distribution_plot
-from src.tensorspec.components.matrices import create_3D_matrix as create_3D_matrix_native
-from src.tensorspec.components.matrices_plt import create_3D_matrix as create_3D_matrix_plt
+from src.tensorspec.components.matrices import Matrix3DNative
+from src.tensorspec.components.matrices_plt import Matrix3DMatplotlib
 from src.tensorspec.components.labels import make_labels
 
 
@@ -71,9 +71,9 @@ class TensorVisualizationScene(ThreeDScene):
 
         match engine:
             case "matplotlib":
-                create_3D_matrix = create_3D_matrix_plt
+                Matrix3D = Matrix3DMatplotlib
             case "native":
-                create_3D_matrix = create_3D_matrix_native
+                Matrix3D = Matrix3DNative
 
         num_tensors = len(tensors)
         barplots = []
@@ -91,7 +91,7 @@ class TensorVisualizationScene(ThreeDScene):
 
             # -------- create the 3D matrix --------
             cube_group = (
-                create_3D_matrix(tensor, use_opengl_renderer=self.use_opengl)
+                Matrix3D(tensor, use_opengl_renderer=self.use_opengl)
                 .move_to(ORIGIN)
                 .shift(LEFT * self.get_camera_width() * 0.25)
             )
