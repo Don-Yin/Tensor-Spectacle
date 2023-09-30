@@ -2,5 +2,7 @@ media/**
 .DS_Store
 .vscode
 __pycache__
-_dev.py
+_dev**
+assets/private_images/**
 init
+.animations

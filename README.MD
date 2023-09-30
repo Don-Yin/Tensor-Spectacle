@@ -75,6 +75,9 @@ This project is licensed under the CC BY-NC License.
 ## Contribution
 The initial motivation was to visualize the training dynamics of biomimetic neurons. However, I realized this could be useful in many scenarios. I will continue updating this as long as I work with neural networks. Contributions are welcome.
 
+## System
+Tested on Ubuntu 20.04 (see /.github/workflows)
+
 ## Citations
 ```latex
 @misc{Tensor-Spectacle2023,

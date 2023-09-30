@@ -23,7 +23,6 @@ class Example(TensorVisualizationScene):
 def test_example_runs():
     with tempconfig(
         {
-            "use_opengl_renderer": True,
             "disable_caching": True,
             "write_to_movie": True,
             "resolution": "1080p",
@@ -38,3 +37,13 @@ def test_example_runs():
 
 if __name__ == "__main__":
     test_example_runs()
+
+    # self.use_opengl = self.renderer.__class__.__name__ == "OpenGLRenderer"  # add this later
+    # if self.use_opengl:
+    #     # this actually works, but there are problems with the opengl itself
+    #     banner("Using OpenGL Renderer")
+    #     global VGroup, VMobject, FlatMatrix3DBase, FlatMatrix3D, FlatMatrix3DImage
+    #     from manim.mobject.opengl.opengl_vectorized_mobject import OpenGLVGroup as VGroup, OpenGLVMobject as VMobject
+    #     FlatMatrix3DBase.__bases__ = (VMobject,)
+    #     FlatMatrix3D.__bases__ = (FlatMatrix3DBase,)
+    #     FlatMatrix3DImage.__bases__ = (FlatMatrix3DBase,)

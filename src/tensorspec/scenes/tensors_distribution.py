@@ -2,7 +2,7 @@ from manim import ThreeDScene, ORIGIN, LEFT, RIGHT, ReplacementTransform, UP
 from src.tensorspec.components.plots import create_distribution_plot
 from src.tensorspec.components.matrices import Matrix3DNative
 from src.tensorspec.components.matrices_plt import Matrix3DMatplotlib
-from src.tensorspec.components.labels import make_labels
+from src.tensorspec.components.progress_bar import make_progress_bar
 
 
 class TensorVisualizationScene(ThreeDScene):
@@ -99,7 +99,7 @@ class TensorVisualizationScene(ThreeDScene):
             cubes.append(cube_group)
 
         # -------- labels --------
-        labels = [make_labels(labels, selected_idx=i).to_edge(UP, buff=0.1) for i in range(num_tensors)]
+        labels = [make_progress_bar(labels, selected_idx=i).to_edge(UP, buff=0.1) for i in range(num_tensors)]
 
         # -------- tensors --------
         self.add(barplots[0], cubes[0], labels[0])

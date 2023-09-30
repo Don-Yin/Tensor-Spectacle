@@ -1,7 +1,7 @@
 from manim import Rectangle, Text, VGroup, WHITE, BLUE, RIGHT
 
 
-def make_labels(labels: list[str], selected_idx=0, use_opengl_renderer=False):
+def make_progress_bar(labels: list[str], selected_idx=0, use_opengl_renderer=False):
     """
     Creates a list of horizontally aligned rectangles with one selected rectangle having a label.
         Parameters:
