@@ -61,5 +61,6 @@ def test_example_runs():
         scene.render()
         open_media_file(scene.renderer.file_writer.movie_file_path)
 
+
 if __name__ == "__main__":
     test_example_runs()
