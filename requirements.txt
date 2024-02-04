@@ -3,3 +3,4 @@ manim
 torch
 matplotlib
 potracer
+toml

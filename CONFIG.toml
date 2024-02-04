@@ -1,0 +1,7 @@
+# https://docs.manim.community/en/stable/guides/configuration.html
+# ['fourk_quality', 'production_quality', 'high_quality', 'medium_quality', 'low_quality', 'example_quality']"
+quality = "fourk_quality"
+frame_rate = 5
+disable_caching = true
+write_to_movie = true
+save_last_frame = true

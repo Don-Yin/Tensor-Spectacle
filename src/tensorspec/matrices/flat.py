@@ -12,6 +12,7 @@ from manim import (
     ImageMobject,
     FadeIn,
     Create,
+    Tex,
     Write,
 )
 import inspect
@@ -24,6 +25,10 @@ class FlatMatrix3DBase(Mobject):
     def __init__(self, **kwargs):
         """dimensions: the final dimensions to which the image is resized; the channels will be interpolated"""
         self.dimensions, self.label = kwargs.get("dimensions"), kwargs.get("label")
+        self.main_color = kwargs.get("main_color", BLACK)
+        self.font_color = kwargs.get("font_color", WHITE)
+        self.total_channel_thickness = kwargs.get("total_channel_thickness", 1.5)
+        self.label_font_size = kwargs.get("label_font_size", 24)
         # ================== pop kwargs for parent ==================
         parent_params = inspect.signature(super().__init__).parameters
         [kwargs.pop(kw) for kw in list(kwargs.keys()) if kw not in parent_params]
@@ -32,9 +37,9 @@ class FlatMatrix3DBase(Mobject):
         assert len(self.dimensions) == 3, "dimensions must be a tuple of length 3"
 
         self.num_channels, self.dimensions_2d = self.dimensions[0], self.dimensions[1:]
-        self.total_channel_thickness = self.get_channel_thickness(self.num_channels)
+        # self.total_channel_thickness = self.get_channel_thickness(self.num_channels)
         self.stroke_width = self.get_stroke_width(self.num_channels)
-        self.between_channel_distance = self.total_channel_thickness / (self.num_channels - 1)
+        self.between_channel_distance = self.total_channel_thickness / ((self.num_channels - 1) + 1e-8)
 
     def get_stroke_width(self, channels: int):
         """dynamic stroke width based on the number of channels"""
@@ -77,8 +82,8 @@ class FlatMatrix3DImage(FlatMatrix3DBase):
 
     def __init__(self, **kwargs):
         """additional params: image_path: Path"""
-        super().__init__(**kwargs)
         self.image_path = kwargs.get("image_path")
+        super().__init__(**kwargs)
         assert isinstance(self.image_path, Path), "image_path must be a Path object"
         self.make_matrix()
 
@@ -96,8 +101,10 @@ class FlatMatrix3DImage(FlatMatrix3DBase):
         # resize to the self.dimensions_2d
 
         rgb_data = [image_tensor[:, :, i] for i in range(image_tensor.shape[-1])]
+        rgb_data = [rgb_data[i % len(rgb_data)] for i in range(self.num_channels)]
+
         self.rgb_mobjects_list = [
-            ImageMobject(rgb_data[i]).scale_to_fit_width(self.dimensions_2d[0]) for i in range(image_tensor.shape[-1])
+            ImageMobject(rgb_data[i]).scale_to_fit_width(self.dimensions_2d[0]) for i in range(self.num_channels)
         ]
         self.masks_obj_list = [
             Rectangle(
@@ -113,18 +120,18 @@ class FlatMatrix3DImage(FlatMatrix3DBase):
             .set_stroke(width=self.stroke_width)
             .scale_to_fit_width(self.rgb_mobjects_list[i].width)
             .move_to(self.rgb_mobjects_list[i].get_center())
-            for i in range(3)
+            for i in range(self.num_channels)
         ]
 
         self.data = []
-        for i in range(3):
+        for i in range(self.num_channels):
             masked_channel = Group(self.rgb_mobjects_list[i], self.masks_obj_list[i])
             self.data.append(masked_channel)
         self.data = Group(*self.data)
         for i, channel in enumerate(self.data):
             channel.shift(i * self.between_channel_distance * DL)
 
-        self.text_obj = Text(self.label, color=WHITE)
+        self.text_obj = Text(self.label, color=self.font_color)
         self.text_obj = self.text_obj.next_to(self.data, UP, buff=self.data.height * 0.1).scale_to_fit_width(
             self.data.width * 0.05 * len(self.label)
         )
@@ -154,8 +161,8 @@ class FlatMatrix3D(FlatMatrix3DBase):
                     grid_xstep=1.0,
                     grid_ystep=1.0,
                     fill_opacity=1,
-                    fill_color=BLACK,  # block
-                    color=WHITE,  # lines
+                    fill_color=self.main_color,
+                    color=WHITE if self.main_color == BLACK else BLACK,  # stroke
                     stroke_width=self.stroke_width,
                 ).set_stroke(width=self.stroke_width)
                 for _ in range(self.num_channels)
@@ -164,12 +171,12 @@ class FlatMatrix3D(FlatMatrix3DBase):
         for i, rect in enumerate(self.matrix):
             rect.shift(i * self.between_channel_distance * DL)
 
-        self.dimension_label = Text(str(self.dimensions), font_size=8, color=WHITE)
+        self.dimension_label = Text(str(self.dimensions), font_size=self.label_font_size, color=WHITE)
         self.dimension_label = self.dimension_label.next_to(self.matrix, UP, buff=self.matrix.height * 0.1).scale_to_fit_width(
             self.matrix.width * 0.03 * len(str(self.dimensions))
         )
 
-        self.text_str = Text(self.label, color=WHITE)
+        self.text_str = Tex(self.label, color=self.font_color, font_size=self.label_font_size)
         self.text_str = self.text_str.next_to(self.dimension_label, UP, buff=self.matrix.height * 0.1).scale_to_fit_width(
             self.matrix.width * 0.05 * len(self.label)
         )

@@ -1,5 +1,5 @@
 import inspect
-from manim import UP, DOWN, LEFT, RIGHT, DEGREES, Arrow, Mobject, VMobject, LineJointType, FadeIn
+from manim import UP, DOWN, LEFT, RIGHT, DEGREES, BLACK, Arrow, Mobject, VMobject, LineJointType, FadeIn
 
 
 class ConnectionArrow(Mobject):
@@ -19,6 +19,7 @@ class ConnectionArrow(Mobject):
         self.mobject_to, self.edge_to = kwargs.get("to")
         self.buff = kwargs.get("buff", 0.1)
         self.stroke_width = kwargs.get("stroke_width", 3)
+        self.arrow_color = kwargs.get("color", BLACK)
         # ================== pop kwargs for parent ==================
         parent_params = inspect.signature(super().__init__).parameters
         [kwargs.pop(kw) for kw in list(kwargs.keys()) if kw not in parent_params]
@@ -57,7 +58,15 @@ class ConnectionArrow(Mobject):
         elif tuple(self.edge_from) == tuple(RIGHT):
             path_arc = 180 * DEGREES
 
-        arrow = Arrow(start_point, end_point, path_arc=path_arc)
+        arrow = Arrow(
+            start_point,
+            end_point,
+            path_arc=path_arc,
+            color=self.arrow_color,
+            buff=self.buff,
+            stroke_width=self.stroke_width,
+            stroke_color=self.arrow_color,
+        )
 
         self.add(arrow)
 
@@ -80,7 +89,9 @@ class ConnectionArrow(Mobject):
         turning_point = [x_coord, y_coord, 0]
 
         # This will contain our path (a line that turns and goes to just before the end_point)
-        path = VMobject().set_points_as_corners([start_point, turning_point, end_point - 0.05 * (end_point - turning_point)])
+        path = VMobject(stroke_color=self.arrow_color, stroke_width=self.stroke_width).set_points_as_corners(
+            [start_point, turning_point, end_point - 0.05 * (end_point - turning_point)]
+        )
         path.joint_type = LineJointType.ROUND
 
         # This is a short arrow just to show the tip at the end
@@ -88,6 +99,7 @@ class ConnectionArrow(Mobject):
             turning_point,
             end_point,
             buff=0,
+            color=self.arrow_color,
             stroke_width=self.stroke_width,
             max_stroke_width_to_length_ratio=0.1,
         )
