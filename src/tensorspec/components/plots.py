@@ -2,7 +2,6 @@
 Script for making the bar plot showing the distribution of tensor values at the tensor -> distribution section
 """
 
-
 from manim import BarChart, DOWN, Group, Text, UP, VMobject, RIGHT, LEFT
 import numpy as np
 from scipy.stats import gaussian_kde

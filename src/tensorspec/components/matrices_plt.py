@@ -2,7 +2,6 @@
 Script making the stack of 3D cubes at the tensor -> 3D matrix section using matplotlib to generate the svg and use those as mobjects. This is much faster than using manim native cubes.
 """
 
-
 from manim import SVGMobject, VGroup, VMobject, Text, DOWN, Mobject
 import matplotlib.pyplot as plt
 from uuid import uuid4

@@ -2,7 +2,6 @@
 an animatio nof the original implementation of the flexible layer
 """
 
-
 from manim import (
     Arrow,
     DOWN,
