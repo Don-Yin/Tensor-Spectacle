@@ -1,6 +1,7 @@
 """
 VAE vs Supervised Learning
 """
+
 from pathlib import Path
 from itertools import product
 import toml
@@ -107,7 +108,11 @@ class Example(MovingCameraScene):
 
         # node regulation
         node_regulation = NetNode(
-            text="Loss Regulation with Mixture Gaussian Modelling", text_color=BLACK, fill_color=BLACK, text_font_size=27, rec_width=7
+            text="Loss Regulation with Mixture Gaussian Modelling",
+            text_color=BLACK,
+            fill_color=BLACK,
+            text_font_size=27,
+            rec_width=7,
         ).next_to(vae.latent_distribution_group, UP * 9)
 
         arrow_regulation = Arrow(vae.latent_label.get_top(), node_regulation.get_bottom(), color=BLACK, stroke_width=2)

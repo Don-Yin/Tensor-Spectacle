@@ -72,7 +72,6 @@ class Example(MovingCameraScene):
         node_downstream.next_to(vae.vector_label, UP * 5)
         arrow_downstream = Arrow(vae.vector_label.get_top(), node_downstream.get_bottom(), color=BLACK, stroke_width=2)
 
-
         # animate ----
         transforms = [
             *node_downstream.on_create(),

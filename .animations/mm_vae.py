@@ -1,6 +1,7 @@
 """
 VAE vs Supervised Learning
 """
+
 from pathlib import Path
 from itertools import product
 import toml

@@ -102,7 +102,7 @@ class Example(MovingCameraScene):
             text=r"Unsupervised\\Clustering\\(e.g., SuStaIn)",
             text_color=BLACK,
             fill_color=BLACK,
-            text_font_size=self.font_size-3,
+            text_font_size=self.font_size - 3,
             rec_width=4,
         ).next_to(stacked_embeddings_mul, RIGHT * 5)
 
@@ -145,7 +145,9 @@ class Example(MovingCameraScene):
         )
 
         # discriminator
-        node_discriminator = Coder(edge_ratio=0.5, rotate_degrees=90, label=f"Discriminator", font_size=self.font_size-8).scale(1.2)
+        node_discriminator = Coder(
+            edge_ratio=0.5, rotate_degrees=90, label=f"Discriminator", font_size=self.font_size - 8
+        ).scale(1.2)
         node_discriminator.next_to(mm_vae.vae.vector_label, UP * 6).shift(LEFT * 2)
         arrow_disc = ConnectionArrow(
             _from=(mm_vae.vae.vector_label, UP), to=(node_discriminator, RIGHT), color=BLACK, stroke_width=3
