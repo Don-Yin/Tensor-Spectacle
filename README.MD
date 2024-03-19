@@ -1,5 +1,6 @@
 # Tensor-Spectacle: Visualizing a Sequence of Tensors
-Uses manim to visulize a sequence of tensors.
+> Uses manim to visulize a sequence of tensors.
+> This repository is currently used for personal academic paper drawing purpose. If you are interested in codevelop this further, please get in touch.
 
 ## demo takes a few seconds to load:
 - When using the matplotlib as engine:
